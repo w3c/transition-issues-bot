@@ -1,0 +1,29 @@
+{
+  "name": "transition-issues-bot",
+  "version": "1.0.0",
+  "description": "Track issues in w3c/transitions and acts on them.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w3c/transition-issues-bot.git"
+  },
+  "author": "plh@w3.org",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/w3c/transition-issues-bot/issues"
+  },
+  "homepage": "https://github.com/w3c/transition-issues-bot#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "io-promise": "^1.0.1",
+    "nodemailer": "^4.6.8"
+  }
+}
