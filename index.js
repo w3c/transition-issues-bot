@@ -77,5 +77,7 @@ let port = process.env.PORT || 4567;
 app.listen(port, () => {
   console.log("Express server listening on port %d in %s mode", port, app.settings.env);
   console.log("App started in", (Date.now() - t0) + "ms.");
+  monitor.log("Express server listening on port %d in %s mode", port, app.settings.env);
+  monitor.log("App started in", (Date.now() - t0) + "ms.");
 });
 /* eslint-enable no-console */
