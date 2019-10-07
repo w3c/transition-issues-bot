@@ -14,6 +14,7 @@ app.enable("trust proxy");
 
 app.use(bodyParser.json());
 
+monitor.setName("Transition request notifier");
 monitor.install(app);
 
 function fromGitHub(req) {
