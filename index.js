@@ -46,7 +46,7 @@ app.post("/payload", function (req, res, next) {
   let ghEvent = req.get("X-GitHub-Event");
   monitor.log("GitHub event " + ghEvent + " " + req.body.action);
 
-  io.save("gh-" + ghEvent + ".json", req.body);
+  // io.save("/tmp/gh-" + ghEvent + ".json", req.body);
   try {
     ghHandler.dispatchEvent(ghEvent, req.body);
     res.status(200).send("<p>roger</p>");
@@ -78,6 +78,6 @@ app.listen(port, () => {
   console.log("Express server listening on port %d in %s mode", port, process.env.NODE_ENV);
   console.log("App started in", (Date.now() - t0) + "ms.");
   monitor.log("Express server listening on port " + port + " in " + process.env.NODE_ENV + " mode");
-  monitor.log("App started in" + (Date.now() - t0) + "ms.");
+  monitor.log("App started in " + (Date.now() - t0) + "ms.");
 });
 /* eslint-enable no-console */
