@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hook</title>
+
+  <script>
+  function addURL(url) {
+    if (url === "") {
+      return; // empty, ignore
+    }
+    fetch('../hook', {
+      method: 'POST',
+      mode: 'same-origin',
+      cache: 'no-cache',
+      credentials: 'omit',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      redirect: 'error',
+      referrer: 'no-referrer',
+      body: JSON.stringify({url: url })
+    })
+  }
+</script>
+</head>
+<body>
+  <input type="text" maxlength="255" id="url" name="url" size="60" title="URL of the service to monitor" placeholder="https://example.com/myservice/monitor">
+  <label title='Add a service'><button onclick="addURL(document.getElementById('url').value);">Add a service</button></label>
+
+<section id='services'>
+
+</section>
+</body>
+</html>

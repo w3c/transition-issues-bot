@@ -63,7 +63,7 @@ app.post("/payload", function (req, res, next) {
 
 app.post("/hook", function (req, res, next) {
   try {
-    addHook(ghEvent, req.body);
+    addHook(req.body.url);
     res.status(200).send("<p>Added " + req.body + "</p>");
   } catch (error) {
     monitor.error(error);
@@ -75,6 +75,15 @@ app.post("/hook", function (req, res, next) {
 
 app.get("/doc", function (req, res, next) {
   io.read("./docs/index.html").then(data => {
+    res.send(data);
+
+  }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
+  .then(() => next());
+
+});
+
+app.get("/doc/hook", function (req, res, next) {
+  io.read("./docs/hook.html").then(data => {
     res.send(data);
 
   }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
