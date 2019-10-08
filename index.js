@@ -29,16 +29,6 @@ function fromGitHub(req) {
           && ghEvent !== undefined;
 }
 
-app.get("/events", function (req, res, next) {
-  let events = ghHandler.getEvents();
-  let body = "<h1>Event log (" + events.length + ")</h1>";
-  for (const entry of events) {
-    body += "<p>[" + entry.timestamp + "] [" + entry.event + "] " + entry.payload.action;
-  }
-  res.send(body);
-  next();
-});
-
 app.post("/payload", function (req, res, next) {
   if (!fromGitHub(req)) {
     monitor.warn("POST isn't from GitHub");
