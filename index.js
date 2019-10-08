@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const io = require("io-promise");
 const t0 = Date.now();
 const ghHandler = require("./lib/GHEventHandler.js");
-const addHook = require("./addHook-issue-transition.js").addHook;
+const addHook = require("./lib/notify-issue-transition.js").addHook;
 
 const config = require("./config.json");
 
