@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/w3c/transition-issues-bot#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "io-promise": "^1.0.1",
-    "nodemailer": "^4.6.8"
+    "nodemailer": "^6.3.0"
   }
 }
