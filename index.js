@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const io = require("io-promise");
 const t0 = Date.now();
 const ghHandler = require("./lib/GHEventHandler.js");
+const addHook = require("./addHook-issue-transition.js").addHook;
+
 const config = require("./config.json");
 
 const monitor  = require("./lib/monitor.js");
@@ -52,9 +54,19 @@ app.post("/payload", function (req, res, next) {
     ghHandler.dispatchEvent(ghEvent, req.body);
     res.status(200).send("<p>roger</p>");
   } catch (error) {
-    /* eslint-disable no-console */
-    console.error(error);
-    /* eslint-enable no-console */
+    monitor.error(error);
+    res.status(500).send("mayday");
+  }
+  next();
+  return;
+});
+
+app.post("/hook", function (req, res, next) {
+  try {
+    addHook(ghEvent, req.body);
+    res.status(200).send("<p>Added " + req.body + "</p>");
+  } catch (error) {
+    monitor.error(error);
     res.status(500).send("mayday");
   }
   next();
