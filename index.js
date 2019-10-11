@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const io = require("io-promise");
 const t0 = Date.now();
 // const ghHandler = require("./lib/GHEventHandler.js");
-const { loop, addHook } = require("./lib/notify-issue-transition.js");
+const { addHook } = require("./lib/notify-issue-transition.js");
 
 const config = require("./config.json");
 
@@ -82,8 +82,6 @@ app.get("/doc/hook", function (req, res, next) {
 });
 
 monitor.stats(app);
-
-loop();
 
 let port = process.env.PORT || 4567;
 
