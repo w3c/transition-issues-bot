@@ -4,8 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const io = require("io-promise");
 const t0 = Date.now();
-const ghHandler = require("./lib/GHEventHandler.js");
-const addHook = require("./lib/notify-issue-transition.js").addHook;
+// const ghHandler = require("./lib/GHEventHandler.js");
+const { loop, addHook } = require("./lib/notify-issue-transition.js");
 
 const config = require("./config.json");
 
@@ -41,7 +41,7 @@ app.post("/payload", function (req, res, next) {
 
   // io.save("/tmp/gh-" + ghEvent + ".json", req.body);
   try {
-    ghHandler.dispatchEvent(ghEvent, req.body);
+    // HOOK DEACTIVATED ghHandler.dispatchEvent(ghEvent, req.body);
     res.status(200).send("<p>roger</p>");
   } catch (error) {
     monitor.error(error);
@@ -82,6 +82,8 @@ app.get("/doc/hook", function (req, res, next) {
 });
 
 monitor.stats(app);
+
+loop();
 
 let port = process.env.PORT || 4567;
 
