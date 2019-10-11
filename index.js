@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const io = require("io-promise");
 const t0 = Date.now();
 // const ghHandler = require("./lib/GHEventHandler.js");
-const { addHook } = require("./lib/notify-issue-transition.js");
+const { addHook, nudge } = require("./lib/notify-issue-transition.js");
 
 const config = require("./config.json");
 
@@ -64,6 +64,18 @@ app.post("/hook", function (req, res, next) {
   return;
 });
 
+app.post("/nudge", function (req, res, next) {
+  try {
+    nudge();
+    res.status(200).send("<p>Nudged</p>");
+  } catch (error) {
+    monitor.error(error);
+    res.status(500).send("mayday");
+  }
+  next();
+  return;
+});
+
 app.get("/doc", function (req, res, next) {
   io.read("./docs/index.html").then(data => {
     res.send(data);
@@ -75,6 +87,15 @@ app.get("/doc", function (req, res, next) {
 
 app.get("/doc/hook", function (req, res, next) {
   io.read("./docs/hook.html").then(data => {
+    res.send(data);
+
+  }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
+  .then(() => next());
+
+});
+
+app.get("/doc/nudge", function (req, res, next) {
+  io.read("./docs/nudge.html").then(data => {
     res.send(data);
 
   }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
