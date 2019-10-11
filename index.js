@@ -42,6 +42,7 @@ app.post("/payload", function (req, res, next) {
   // io.save("/tmp/gh-" + ghEvent + ".json", req.body);
   try {
     // HOOK DEACTIVATED ghHandler.dispatchEvent(ghEvent, req.body);
+    monitor.log("Webhook disabled");
     res.status(200).send("<p>roger</p>");
   } catch (error) {
     monitor.error(error);
