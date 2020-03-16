@@ -111,7 +111,9 @@ let port = process.env.PORT || 4567;
 app.listen(port, () => {
   console.log("Express server listening on port %d in %s mode", port, process.env.NODE_ENV);
   console.log("App started in", (Date.now() - t0) + "ms.");
-  monitor.log("Express server listening on port " + port + " in " + process.env.NODE_ENV + " mode");
-  monitor.log("App started in " + (Date.now() - t0) + "ms.");
+  if (!config.debug && process.env["NODE_ENV"] != "production") {
+    console.warn("WARNING: 'export NODE_ENV=production' is missing");
+    console.warn("See http://expressjs.com/en/advanced/best-practice-performance.html#set-node_env-to-production");
+  }
 });
 /* eslint-enable no-console */
