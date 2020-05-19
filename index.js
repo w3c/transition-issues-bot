@@ -2,7 +2,7 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const io = require("io-promise");
+const fs = require('fs').promises;
 const t0 = Date.now();
 // const ghHandler = require("./lib/GHEventHandler.js");
 const { addHook, nudge } = require("./lib/notify-issue-transition.js");
@@ -39,7 +39,6 @@ app.post("/payload", function (req, res, next) {
   let ghEvent = req.get("X-GitHub-Event");
   monitor.log("GitHub event " + ghEvent + " " + req.body.action);
 
-  // io.save("/tmp/gh-" + ghEvent + ".json", req.body);
   try {
     // HOOK DEACTIVATED ghHandler.dispatchEvent(ghEvent, req.body);
     monitor.log("Webhook disabled");
@@ -77,7 +76,7 @@ app.post("/nudge", function (req, res, next) {
 });
 
 app.get("/doc", function (req, res, next) {
-  io.read("./docs/index.html").then(data => {
+  fs.readFile("./docs/index.html").then(data => {
     res.send(data);
 
   }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
@@ -86,7 +85,7 @@ app.get("/doc", function (req, res, next) {
 });
 
 app.get("/doc/hook", function (req, res, next) {
-  io.read("./docs/hook.html").then(data => {
+  fs.readFile("./docs/hook.html").then(data => {
     res.send(data);
 
   }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
@@ -95,7 +94,7 @@ app.get("/doc/hook", function (req, res, next) {
 });
 
 app.get("/doc/nudge", function (req, res, next) {
-  io.read("./docs/nudge.html").then(data => {
+  fs.readFile("./docs/nudge.html").then(data => {
     res.send(data);
 
   }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
