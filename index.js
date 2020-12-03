@@ -7,6 +7,8 @@ const t0 = Date.now();
 // const ghHandler = require("./lib/GHEventHandler.js");
 const { addHook, nudge } = require("./lib/notify-issue-transition.js");
 
+const path = require('path');
+
 const config = require("./config.json");
 
 const monitor  = require("./lib/monitor.js");
@@ -76,7 +78,7 @@ app.post("/nudge", function (req, res, next) {
 });
 
 app.get("/doc", function (req, res, next) {
-  fs.readFile("./docs/index.html").then(data => {
+  fs.readFile(path.resolve(__dirname, "./docs/index.html")).then(data => {
     res.send(data);
 
   }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
@@ -85,7 +87,7 @@ app.get("/doc", function (req, res, next) {
 });
 
 app.get("/doc/hook", function (req, res, next) {
-  fs.readFile("./docs/hook.html").then(data => {
+  fs.readFile(path.resolve(__dirname, "./docs/hook.html")).then(data => {
     res.send(data);
 
   }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
@@ -94,7 +96,7 @@ app.get("/doc/hook", function (req, res, next) {
 });
 
 app.get("/doc/nudge", function (req, res, next) {
-  fs.readFile("./docs/nudge.html").then(data => {
+  fs.readFile(path.resolve(__dirname, "./docs/nudge.html")).then(data => {
     res.send(data);
 
   }).catch(() => res.status(500).send("contact Starman. He is orbiting somewhere in space in his car."))
