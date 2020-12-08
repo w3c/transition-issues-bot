@@ -9,7 +9,7 @@ const { addHook, nudge } = require("./lib/notify-issue-transition.js");
 
 const path = require('path');
 
-const config = require("./config.json");
+const config = require("./lib/config.js");
 
 const monitor  = require("./lib/monitor.js");
 let app = module.exports = express();
@@ -106,13 +106,16 @@ app.get("/doc/nudge", function (req, res, next) {
 
 monitor.stats(app);
 
-let port = process.env.PORT || 4567;
+if (!config.checkOptions("host", "port", "env")) {
+  console.error("Improper configuration. Not Starting");
+  return;
+}
 
 /* eslint-disable no-console */
-app.listen(port, () => {
-  console.log("Express server listening on port %d in %s mode", port, process.env.NODE_ENV);
+app.listen(config.port, () => {
+  console.log(`Express server ${config.localhost} listening on port ${config.port} in ${config.env} mode`);
   console.log("App started in", (Date.now() - t0) + "ms.");
-  if (!config.debug && process.env["NODE_ENV"] != "production") {
+  if (!config.debug && config.env != "production") {
     console.warn("WARNING: 'export NODE_ENV=production' is missing");
     console.warn("See http://expressjs.com/en/advanced/best-practice-performance.html#set-node_env-to-production");
   }
