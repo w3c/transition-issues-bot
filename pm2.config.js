@@ -8,10 +8,11 @@ module.exports = {
       name      : 'transition-issues-bot',
       script    : 'index.js',
       env: {
-        NODE_ENV: 'production'
+        NODE_ENV: 'production',
+        PORT    : 4567
       },
       error_file : "/var/log/nodejs/transition-issues-bot.err",
-      out_file : "/var/log/nodejs/transition-issues-bot.log",
+      out_file   : "/var/log/nodejs/transition-issues-bot.log",
       "node_args": "--max_old_space_size=400"
     }
   ]
