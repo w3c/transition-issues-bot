@@ -113,7 +113,7 @@ if (!config.checkOptions("host", "port", "env")) {
 
 /* eslint-disable no-console */
 app.listen(config.port, () => {
-  console.log(`Express server ${config.localhost} listening on port ${config.port} in ${config.env} mode`);
+  console.log(`Express server ${config.host} listening on port ${config.port} in ${config.env} mode`);
   console.log("App started in", (Date.now() - t0) + "ms.");
   if (!config.debug && config.env != "production") {
     console.warn("WARNING: 'export NODE_ENV=production' is missing");
