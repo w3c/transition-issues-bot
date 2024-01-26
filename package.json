@@ -21,11 +21,11 @@
   },
   "homepage": "https://github.com/w3c/transition-issues-bot#readme",
   "dependencies": {
-    "@octokit/core": "^2.5.0",
-    "@octokit/plugin-throttling": "^3.2.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.0",
-    "nodemailer": "^6.3.0"
+    "@octokit/core": "3.*.*",
+    "@octokit/plugin-throttling": "3.*.*",
+    "body-parser": "1.*.*",
+    "express": "4.*.*",
+    "node-fetch": "2.*.*",
+    "nodemailer": "6.*.*"
   }
 }
