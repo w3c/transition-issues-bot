@@ -1,3 +1,6 @@
 {
-    "repository": "w3c/transitions"
+    "repository": "w3c/transitions",
+    "label": "Awaiting Team Verification",
+    "cache": "https://api.github.com",
+    "ghToken": "missing-github-token"
 }
