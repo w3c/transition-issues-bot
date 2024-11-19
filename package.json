@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "Track issues in w3c/transitions and acts on them.",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "doc": "docs",
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node .",
+    "test": "node --test",
+    "coverage": "node --test --experimental-test-coverage"
   },
   "repository": {
     "type": "git",
@@ -21,11 +24,11 @@
   },
   "homepage": "https://github.com/w3c/transition-issues-bot#readme",
   "dependencies": {
-    "@octokit/core": "3.*.*",
-    "@octokit/plugin-throttling": "3.*.*",
+    "@octokit/core": "6.*.*",
+    "@octokit/plugin-throttling": "9.*.*",
     "body-parser": "1.*.*",
+    "debug": "4.*.*",
     "express": "4.*.*",
-    "node-fetch": "2.*.*",
     "nodemailer": "6.*.*"
   }
 }

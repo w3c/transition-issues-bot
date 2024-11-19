@@ -1,18 +1,20 @@
 "use strict";
 
-const express = require("express");
-const bodyParser = require("body-parser");
-const fs = require('fs').promises;
+// Measure the time spent to load the service
 const t0 = Date.now();
-// const ghHandler = require("./lib/GHEventHandler.js");
-const { addHook, nudge } = require("./lib/notify-issue-transition.js");
 
-const path = require('path');
+import express from "express";
+import bodyParser from "body-parser";
+import fs from 'fs/promises';
+// import ghHandler from require("./lib/GHEventHandler.js"); @@UNUSED
+import { addHook, nudge }  from "./lib/notify-issue-transition.js";
 
-const config = require("./lib/config.js");
+import path from 'path';
 
-const monitor  = require("./lib/monitor.js");
-let app = module.exports = express();
+import config from "./lib/config.js";
+
+import * as monitor from "./lib/monitor.js";
+let app = express();
 
 app.enable("trust proxy");
 
@@ -109,9 +111,14 @@ app.get("/doc/nudge", function (req, res, next) {
 
 monitor.stats(app);
 
-if (!config.checkOptions("host", "port", "env")) {
+// check that our default options are properly setup, or abort
+const missing = config.checkOptions("host", "port", "env");
+if (missing) {
   console.error("Improper configuration. Not Starting");
-  return;
+  for (const opt of missing) {
+    console.error(`${opt} config option missing`);
+  }
+  process.abort();
 }
 
 /* eslint-disable no-console */
