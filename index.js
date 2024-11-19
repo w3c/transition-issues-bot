@@ -80,7 +80,7 @@ app.post("/nudge", function (req, res, next) {
 });
 
 app.get("/doc", function (req, res, next) {
-  fs.readFile(path.resolve(__dirname, "./docs/index.html")).then(data => {
+  fs.readFile(path.resolve(config.basedir, "./docs/index.html")).then(data => {
     res.set('Content-Type', 'text/html')
     res.send(data);
 
@@ -90,7 +90,7 @@ app.get("/doc", function (req, res, next) {
 });
 
 app.get("/doc/hook", function (req, res, next) {
-  fs.readFile(path.resolve(__dirname, "./docs/hook.html")).then(data => {
+  fs.readFile(path.resolve(config.basedir, "./docs/hook.html")).then(data => {
     res.set('Content-Type', 'text/html')
     res.send(data);
 
@@ -100,7 +100,7 @@ app.get("/doc/hook", function (req, res, next) {
 });
 
 app.get("/doc/nudge", function (req, res, next) {
-  fs.readFile(path.resolve(__dirname, "./docs/nudge.html")).then(data => {
+  fs.readFile(path.resolve(config.basedir, "./docs/nudge.html")).then(data => {
     res.set('Content-Type', 'text/html');
     res.send(data);
 
