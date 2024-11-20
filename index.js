@@ -112,7 +112,7 @@ app.get("/doc/nudge", function (req, res, next) {
 monitor.stats(app);
 
 // check that our default options are properly setup, or abort
-const missing = config.checkOptions("host", "port", "env", "ghToken", "cache", "repository");
+const missing = config.checkOptions("host", "port", "env", "ghToken", "cache", "repository", "label");
 if (missing) {
   console.error("Improper configuration. Not Starting");
   for (const opt of missing) {
